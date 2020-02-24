@@ -4,15 +4,14 @@ import { Container, Row, Col } from '../Components/Layout';
 import { Text, TextInput, Button, View, Image, StyleSheet, Icon } from 'react-native';
 import { Colors } from '../assets/Colors';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
-
+import { faEnvelope,faKey } from '@fortawesome/free-solid-svg-icons'
 
 export const LoginScreen = props => {
-   
+
     return (
 
         <Container style={{ alignItems: 'center', justifyContent: 'center' }}>
-             <FontAwesomeIcon icon={faUser} size={512} color="black"/>
+
             <Image
                 style={{ width: 120, height: 120 }}
                 resizeMode="contain"
@@ -24,22 +23,20 @@ export const LoginScreen = props => {
                 <Col size={1} style={{ justifyContent: 'center', alignItems: 'center', width: '80%', marginBottom: 10 }}>
                     <Text style={{ fontSize: 28, paddingBottom: 16, width: '80%', color: Colors.blue }}>Bienvenido de vuelta!</Text>
                     <Text style={{ fontSize: 18, textAlign: 'left', width: '80%', color: Colors.blue }}>Usuario:</Text>
-
                     <View style={styles.textContainer}>
-                    <TextInput placeholder="Correo electrónico" style={styles.inputStyle} />
-        
+                        <FontAwesomeIcon icon={faEnvelope} size={24} color="black" />
+                        <TextInput placeholder="Correo electrónico" style={styles.inputStyle} />
                     </View>
-               
                 </Col>
             </Row>
             <Row style={{ alignItems: 'center', justifyContent: 'center' }} >
-           
+
                 <Col size={1} style={{ justifyContent: 'center', alignItems: 'center', width: '80%', marginBottom: 10 }}>
                     <Text style={{ fontSize: 18, textAlign: 'left', width: '80%', color: Colors.blue }}>Contraseña:</Text>
                     <TextInput placeholder="Contraseña" style={styles.inputStyle} />
                 </Col>
             </Row>
-        
+
             <Row style={{ justifyContent: 'center' }}>
                 <Col size={1} style={{ alignItems: 'center' }} >
                     <View style={{ width: '80%' }}>
@@ -47,44 +44,44 @@ export const LoginScreen = props => {
                     </View>
 
                     <View style={styles.container}>
-                        
-        <View style={styles.SectionStyle}>
-            
-            
-          <Image
-           
-            //source={{uri:'http://aboutreact.com/wp-content/uploads/2018/08/user.png',}}
 
-            //You can also show the image from you project directory like below
-            source={require('../assets/quoti-logo.png')}
+                        <View style={styles.SectionStyle}>
 
-            style={styles.ImageStyle}
-          />
-        
-          <TextInput
-            style={{ flex: 1 }}
-            placeholder="Email"
-        
-          />
-        </View>
-         </View>
-  
+
+                            <Image
+
+                                //source={{uri:'http://aboutreact.com/wp-content/uploads/2018/08/user.png',}}
+
+                                //You can also show the image from you project directory like below
+                                source={require('../assets/quoti-logo.png')}
+
+                                style={styles.ImageStyle}
+                            />
+
+                            <TextInput
+                                style={{ flex: 1 }}
+                                placeholder="Email"
+
+                            />
+                        </View>
+                    </View>
+
 
                 </Col>
             </Row>
 
-           
+
 
 
 
         </Container>
 
-        
+
     )
 }
 
 const styles = StyleSheet.create({
-    
+
     textContainer: {
         flexDirection: 'row',
         borderBottomWidth: 1,
@@ -105,7 +102,7 @@ const styles = StyleSheet.create({
         borderRadius: 0,
         alignItems: 'center',
         width: '80%',
-        flex:1
+        flex: 1
 
     },
     searchSection: {
@@ -132,9 +129,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         margin: 10,
-      },
-    
-      SectionStyle: {
+    },
+
+    SectionStyle: {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
@@ -144,16 +141,16 @@ const styles = StyleSheet.create({
         height: 40,
         borderRadius: 5,
         margin: 10,
-      },
-    
-      ImageStyle: {
+    },
+
+    ImageStyle: {
         padding: 10,
         margin: 5,
         height: 25,
         width: 25,
         resizeMode: 'stretch',
         alignItems: 'center',
-      },
+    },
 
 
 });
