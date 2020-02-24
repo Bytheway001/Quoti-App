@@ -4,7 +4,7 @@ import { Container, Row, Col } from '../Components/Layout';
 import { Text, TextInput, Button, View, Image, StyleSheet, Icon } from 'react-native';
 import { Colors } from '../assets/Colors';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faEnvelope,faKey } from '@fortawesome/free-solid-svg-icons'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
 
 export const LoginScreen = props => {
 
@@ -24,7 +24,7 @@ export const LoginScreen = props => {
                     <Text style={{ fontSize: 28, paddingBottom: 16, width: '80%', color: Colors.blue }}>Bienvenido de vuelta!</Text>
                     <Text style={{ fontSize: 18, textAlign: 'left', width: '80%', color: Colors.blue }}>Usuario:</Text>
                     <View style={styles.textContainer}>
-                        <FontAwesomeIcon icon={faEnvelope} size={24} color="black" />
+                        <FontAwesomeIcon icon={faUser} size={24} color="black" />
                         <TextInput placeholder="Correo electrónico" style={styles.inputStyle} />
                     </View>
                 </Col>

@@ -2,12 +2,11 @@
 import * as React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
 import { Colors } from './assets/Colors';
 import { LoginScreen } from './Screens/Login';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 const HomeScreen = props => {
-
   return (
     <View style={styles.home}>
       <Text style={styles.homeText}>Home Screen</Text>
@@ -29,6 +28,10 @@ const AppNavigator = createSwitchNavigator({
   Login: {
     screen: LoginScreen
   }
+},
+
+{
+  initialRouteName:'Login'
 });
 
 
