@@ -24,10 +24,27 @@ export const QuoteScreen = ({ navigation }) => {
     const [main_age, setMainAge] = useState("");
     const [couple_age, setCoupleAge] = useState("");
 
-    const handleKidAges = (age) => {
-
+    const handleKidAges = (age, number) => {
+        let ka = [...kidAges];
+        ka[number - 1] = age;
+        setKidAges(ka)
     }
-    console.log(numKids)
+
+    const renderKidInputs = () => {
+        if(numKids<=6){
+            let inputs = [];
+            for (let i = 1; i <= numKids; i++) {
+                inputs.push(<KidInput number={i} value={kidAges[i - 1] || ""} onChange={handleKidAges} />)
+            }
+            return inputs;
+        }
+        else{
+            alert("Debe cotizar un maximo de 6 dependientes")
+        }
+       
+    }
+
+
     return (
         <Container>
             <Row style={{ marginBottom: 10, paddingLeft: 10 }} >
@@ -63,15 +80,16 @@ export const QuoteScreen = ({ navigation }) => {
             <Row style={{ marginBottom: 20, paddingLeft: 10 }}>
                 <Col size={1}>
                     <Text style={{ color: Colors.blue, fontSize: 18, textAlign: 'center' }}>Edades de los Hijos</Text>
-                    <Row style={{ flexWrap: 'wrap' }}>
-                        {
-                            new Array(numKids).map((element,key)=>{
-                                <KidInput key={key} number={key+1}/>
-                            })
-                        }
-                       
-                   
-                    </Row>
+                    {
+                        numKids > 0 ?
+                            <Row style={{ flexWrap: 'wrap' }}>
+                                {renderKidInputs()}
+                            </Row>
+                            :
+                            null
+
+                    }
+
                 </Col>
             </Row>
             <Row style={{ paddingLeft: 10 }}>
@@ -85,9 +103,9 @@ export const QuoteScreen = ({ navigation }) => {
     )
 }
 
-const KidInput = ({number}) => (
+const KidInput = ({ number, value, onChange }) => (
     <Col style={{ paddingHorizontal: 7, width: '33.33%', marginBottom: 10 }}>
         <Text style={{ textAlign: 'center' }}>{number}</Text>
-        <TextInput style={{ textAlign: 'center', borderWidth: 1, borderColor: Colors.blue, height: 40, borderRadius: 20 }} value="88" />
+        <TextInput onChangeText={(e) => onChange(e, number)} value={value} style={{ textAlign: 'center', borderWidth: 1, borderColor: Colors.blue, height: 40, borderRadius: 20 }} />
     </Col>
 )
