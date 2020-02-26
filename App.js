@@ -6,10 +6,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { View, Text } from 'native-base';
 import { AsyncStorage } from 'react-native';
 import { MainNavigator } from './Navigators/MainNavigator';
-import { createStore, applyMiddleware,compose } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import { Provider } from 'react-redux';
-import {rootReducer} from './ducks/root';
+import { Provider, connect } from 'react-redux';
+import { rootReducer } from './ducks/root';
+import { ConfigureToken } from './utils/configureAxios';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middleware = [thunk]
 const store = createStore(
@@ -23,13 +24,17 @@ const App = props => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     LoadApp()
-  }, [])
+  })
 
+  ConfigureToken();
   const LoadApp = async () => {
     const userToken = await AsyncStorage.getItem('jwt')
     if (userToken) {
       setUserToken(userToken)
-
+    }
+    else {
+      setUserToken(null);
+      console.log('Token not set')
     }
     setLoading(false)
   }
@@ -37,17 +42,19 @@ const App = props => {
   if (loading) {
     return <Loading />
   }
+
+
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Navigator screenOptions={{ headerShown: false }} >
           {
             token ?
-              <Stack.Screen name='App' component={MainNavigator} />
+              <Stack.Screen name='Home' component={MainNavigator} />
               :
               <Fragment>
-                <Stack.Screen name="Home" component={LoginScreen} />
-                <Stack.Screen name='App' component={MainNavigator} />
+                <Stack.Screen name="Home" component={LoginScreen} loadApp={LoadApp} />
+
               </Fragment>
           }
         </Stack.Navigator>
@@ -62,6 +69,12 @@ const Loading = props => {
       <Text>LOADING</Text>
     </View>
   )
+}
+
+const mapStateToProps = state => {
+  return {
+    token: state.session.token
+  }
 }
 
 export default App;

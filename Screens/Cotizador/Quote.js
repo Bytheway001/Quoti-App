@@ -48,7 +48,10 @@ const QuoteScreen = ({ navigation,getQuote }) => {
 
     }
 
-
+     const handleQuote =async ()=>{
+        await getQuote({country,plan_type,main_age,couple_age,numKids,kidAges})
+        navigation.navigate('QuoteResult');
+    }
     return (
         <Container>
             <Row style={styles.row} >
@@ -101,7 +104,7 @@ const QuoteScreen = ({ navigation,getQuote }) => {
                             backgroundColor: Colors.blue,
                             paddingVertical: 7
                         }}
-                        onPress={() => getQuote(country,plan_type,main_age,couple_age,numKids,kidAges)}>
+                        onPress={() => handleQuote() }>
                         <Text style={{ textAlign: 'center', color: 'white', fontSize: 18 }}>Cotizar!</Text>
                     </TouchableOpacity>
                 </Col>
@@ -109,13 +112,13 @@ const QuoteScreen = ({ navigation,getQuote }) => {
         </Container>
     )
 }
-
+ 
 const KidInput = ({ number, value, onChange }) => (
     <Col style={styles.kidInput}>
         <Text align='center'>{number}</Text>
         <TextInput onChangeText={(e) => onChange(e, number)} value={value} style={{ textAlign: 'center', borderWidth: 1, borderColor: Colors.blue, height: 40, borderRadius: 20 }} />
     </Col>
-)
+) 
 
 const mapStateToProps = state => (
     {}

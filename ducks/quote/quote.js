@@ -8,7 +8,7 @@ export const getQuote = ({ country, main_age, couple_age, plan_type, num_kids, k
     return dispatch => {
         dispatch(onQuoteRequested());
         return Axios.post(API + "/get_quote_comparison", x)
-            .then(res => res.data)
+            .then(res => {return res.data})
             .then(result => {
                
                 let st = result;
@@ -20,13 +20,13 @@ export const getQuote = ({ country, main_age, couple_age, plan_type, num_kids, k
                     return x;
                 });
                 dispatch(onQuoteSucceeded(st));
-            })
+            }) 
             .catch(err => {
-                console.log(err.response.data)
-                dispatch(onQuoteFailed());
+                console.log(err.response)
+                dispatch(onQuoteFailed()); 
             });
     };
-};
+};  
 
 const initialState = {
     params: {},

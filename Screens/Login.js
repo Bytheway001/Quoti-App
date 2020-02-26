@@ -1,31 +1,31 @@
 import React, { useEffect, useState } from 'react';
-
 import { Container, Row, Col } from '../Components/Layout';
-import { Text, TextInput, Button, View, Image, StyleSheet, Icon, AsyncStorage, KeyboardAvoidingView } from 'react-native';
+import { Text, TextInput,  Image,  AsyncStorage, KeyboardAvoidingView } from 'react-native';
 import { Colors } from '../assets/Colors';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faUser, faEnvelope, faKey } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faKey } from '@fortawesome/free-solid-svg-icons'
 import Axios from 'axios';
 import { API } from '../globals';
 import { TouchableNativeFeedback } from 'react-native-gesture-handler';
-
+import {setAuthToken} from '../utils/setAuthToken';
 export const LoginScreen = props => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-
 
     const login = () => {
         console.log("Logging in")
         Axios.post(API + '/login', { email, password })
             .then(res => {
                 AsyncStorage.setItem("jwt",res.data.jwt)
+                setAuthToken(res.data.jwt)
                 props.navigation.navigate("Home")
             })
             .catch(err => {
                 setError(err.response.data.message)
             })
     }
+    console.log(props.screenProps) 
     return (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior='padding'>
            
