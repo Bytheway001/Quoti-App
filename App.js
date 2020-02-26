@@ -31,7 +31,7 @@ const App = props => {
     const userToken = await AsyncStorage.getItem('jwt')
     if (userToken) {
       setUserToken(userToken)
-    }
+    } 
     else {
       setUserToken(null);
       console.log('Token not set')
@@ -42,7 +42,6 @@ const App = props => {
   if (loading) {
     return <Loading />
   }
-
 
   return (
     <Provider store={store}>

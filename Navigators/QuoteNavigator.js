@@ -5,35 +5,27 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Colors } from '../assets/Colors';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faEdit, faMoneyBill } from '@fortawesome/free-solid-svg-icons';
-
-const TabOptions = {
-    inactiveBackgroundColor:Colors.lightBlue,
-    activeBackgroundColor:Colors.blue,
-    activeTintColor:'white',
-    inactiveTintColor:'white',
-    showIcon:true
-}
+import { createStackNavigator } from '@react-navigation/stack';
 
 
-
-const Tab = createBottomTabNavigator()
+const Stack = createStackNavigator()
 
 export const QuoteNavigator = props=>(
-    <Tab.Navigator tabBarOptions={TabOptions}>
-        <Tab.Screen 
-            name='Quote'
+    <Stack.Navigator>
+        <Stack.Screen 
+            name='Datos de Cotizacion'
             component={QuoteScreen}
             options={{
                 tabBarLabel:'Formulario',
                 tabBarIcon:({ color, size })=>(<FontAwesomeIcon color={color} size={size} icon={faEdit}/>)
             }} />
-        <Tab.Screen 
-            name='QuoteResult'
+        <Stack.Screen 
+            name='Cotización'
             component={QuoteResult}
             options={{
                 tabBarLabel:'Planes',
                 tabBarIcon:({ color, size })=>(<FontAwesomeIcon color={color} size={size} icon={faMoneyBill}/>)
             }}
         />
-    </Tab.Navigator>
+    </Stack.Navigator>
 )
