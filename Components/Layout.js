@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native'
+import { View,Text as P } from 'react-native'
 import { Colors } from '../assets/Colors';
 
 export const Container = ({ children, style }) => {
@@ -24,5 +24,13 @@ export const Col = ({ style, children, size }) => {
         <View style={{ flexDirection:'column',flex:size,...style }}>
             {children}
         </View>
+    )
+}
+
+export const Text = ({style,children,color,size,align})=>{
+    
+
+    return(
+        <P style={{textAlign:align,color:Colors[color],fontSize:size,...style}}>{children}</P>
     )
 }

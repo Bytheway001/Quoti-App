@@ -4,8 +4,9 @@ import { Container, Row, Col } from '../../Components/Layout'
 import { Colors } from '../../assets/Colors'
 import { ScrollView } from 'react-native-gesture-handler'
 import { PlanCard } from './components/PlanCard'
+import { connect } from 'react-redux'
 
-export const QuoteResult = props =>{
+const QuoteResult = props =>{
     return(
        <Container>
            <Row>
@@ -28,3 +29,12 @@ export const QuoteResult = props =>{
        </Container>
     )
 }
+const mapStateToProps = state=>{
+    return {}
+}
+
+const mapDispatchToProps = dispatch =>{
+    return {}
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(QuoteResult)

@@ -13,28 +13,22 @@ export const LoginScreen = props => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-    useEffect(() => {
-        LoadApp()
-    }, [])
-    const LoadApp = async () => {
-        const userToken = await AsyncStorage.getItem('jwt')
-        if (userToken) {
-            props.navigation.navigate("Home")
-        }
-    }
+
 
     const login = () => {
-        console.log("Logging in...");
-        Axios.post(API + '/login', { email, password }).then(res => {
-            
-            props.navigation.navigate("Home")
-        })
+        console.log("Logging in")
+        Axios.post(API + '/login', { email, password })
+            .then(res => {
+                AsyncStorage.setItem("jwt",res.data.jwt)
+                props.navigation.navigate("Home")
+            })
             .catch(err => {
                 setError(err.response.data.message)
             })
     }
     return (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior='padding'>
+           
             <Container style={{ alignItems: 'center', justifyContent: 'center' }}>
 
                 <Image
@@ -85,12 +79,12 @@ export const LoginScreen = props => {
                         <Row style={{ marginTop: 20 }}>
                             <Col size={1} style={{ alignItems: 'center' }}>
                                 {
-                                    error?
-                                    <Text style={{fontSize:16,color:'red'}}>{error}</Text>
-                                    :
-                                    null
+                                    error ?
+                                        <Text style={{ fontSize: 16, color: 'red' }}>{error}</Text>
+                                        :
+                                        null
                                 }
-                            
+
                             </Col>
 
                         </Row>
