@@ -13,74 +13,91 @@ export const HomeScreen = (props) => {
             resizeMode='cover'
         >
 
+
+
+
+
             <Container style={{ alignItems: 'center', justifyContent: 'center', paddingBottom: 200 }}>
-                <Image
-                    style={{ width: 200, height: 200 }}
-                    resizeMode="contain"
-                    source={require('../../assets/quoti-logo.png')}
-                >
-                </Image>
+            <Image
+                style={{ width: 200, height: 200, display: "flex", alignItems: 'center', justifyContent: 'center' }}
+                resizeMode="contain"
+                source={require('../../assets/quoti-logo.png')}
+            ></Image>
+
 
                 <Row>
                     <Col>
-                        <Row>
+                        <Row style={{ alignItems: 'center', borderBottomWidth: 2, borderRightWidth: 2, borderBottomColor: Colors.lightBlue, borderRightColor: Colors.lightBlue }}>
+
                             <View >
                                 <Image
-                                    style={{ width: 60, height: 60, alignItems: 'center', justifyContent: 'center', borderBottomWidth: 2, borderRightWidth: 2, borderBottomColor: Colors.lightBlue, borderRightColor: Colors.lightBlue }}
+                                    style={{ width: 60, height: 60}}
 
                                     source={require('../../assets/placeHolder.png')}
                                 >
                                 </Image>
 
-                                <Text>Soporte</Text>
                             </View>
+
+
+                            <View>
+                                <Text style={{ marginLeft: 7, marginRight:7 }}>Comparador</Text>
+                            </View>
+
                         </Row>
                     </Col>
 
                     <Row>
                         <Col>
+                        <Row style={{ alignItems: 'center', borderBottomWidth: 2, borderBottomColor: Colors.lightBlue }}>
                             <View>
                                 <Image
-                                    style={{ width: 60, height: 60, alignItems: 'center', justifyContent: 'center', borderBottomWidth: 2, borderBottomColor: Colors.lightBlue }}
+                                    style={{ width: 60, height: 60, paddingLeft:10}}
                                     resizeMode="contain"
                                     source={require('../../assets/placeHolder.png')}
                                 >
                                 </Image>
-
-                                <Text>Soporte</Text>
                             </View>
+                            <View>
+                                <Text style={{ marginLeft: 7, marginRight: 0 }}>Documentos</Text>
+                            </View>
+                            </Row>
                         </Col>
+                        
                     </Row>
                 </Row>
 
                 <Row>
-                    <Col>
-                        <Row>
-                            <View>
+                    <Col >
+                        <Row style={{ alignItems: 'center', borderBottomWidth: 2, borderRightWidth: 2, borderBottomColor: Colors.lightBlue, borderRightColor: Colors.lightBlue }}>
+                            <View style={{paddingLeft:5}} >
                                 <Image
-                                    style={{ width: 60, height: 60, alignItems: 'center', justifyContent: 'center', borderBottomWidth: 2, borderRightWidth: 2, borderBottomColor: Colors.lightBlue, borderRightColor: Colors.lightBlue }}
+                                    style={{ width: 60, height: 60 }}
                                     resizeMode="contain"
                                     source={require('../../assets/placeHolder.png')}
                                 >
                                 </Image>
-
-                                <Text>Soporte</Text>
+                            </View>
+                            <View>
+                                <Text style={{ marginLeft: 20, marginRight:10 }}>Cotizador</Text>
                             </View>
                         </Row>
                     </Col>
                     <Row>
                         <Col>
+                        <Row  style={{  alignItems: 'center',borderBottomWidth: 2, borderBottomColor: Colors.lightBlue}}>
                             <View>
                                 <Image
-                                    style={{ width: 60, height: 60, alignItems: 'center', justifyContent: 'center', borderBottomWidth: 2, borderBottomColor: Colors.lightBlue }}
+                                    style={{ width: 60, height: 60}}
                                     resizeMode="contain"
                                     source={require('../../assets/placeHolder.png')}
                                 >
                                 </Image>
-
-
-                                <Text  >Soporte</Text>
                             </View>
+                            <View>
+                                <Text style={{ marginLeft: 20, marginRight:10 }}>Soporte</Text>
+                            </View>
+                            </Row>
                         </Col>
                     </Row>
                 </Row>
