@@ -40,7 +40,7 @@ const App = props => {
     }
     else {
       setUserToken(null);
-      console.log('Token not set')
+      console.log('Token not seted')
     }
     setLoading(false)
   }
