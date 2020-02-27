@@ -1,6 +1,7 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { LoginScreen } from './Screens/Login';
 import { HomeScreen } from './Screens/Home/Home';
+import { FileScreen } from './Screens/Directorio/Files';
 
 //import { MainNavigator } from './Navigators/MainNavigator';
 import { NavigationContainer } from '@react-navigation/native';
@@ -14,6 +15,7 @@ import { Provider } from 'react-redux';
 import { rootReducer } from './ducks/root';
 import { ConfigureToken } from './utils/configureAxios';
 import { Ionicons } from '@expo/vector-icons';
+
 import * as Font from 'expo-font';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middleware = [thunk]
@@ -61,7 +63,7 @@ const App = props => {
               <Stack.Screen name='Home' component={MainNavigator} />
               :
               <Fragment>
-                <Stack.Screen name="Home" component={HomeScreen} loadApp={LoadApp} />
+                <Stack.Screen name="Home" component={FileScreen} loadApp={LoadApp} />
 
               </Fragment>
           }
