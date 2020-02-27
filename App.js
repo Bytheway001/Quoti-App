@@ -1,5 +1,7 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { LoginScreen } from './Screens/Login';
+import { HomeScreen } from './Screens/Home/Home';
+
 //import { MainNavigator } from './Navigators/MainNavigator';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -53,7 +55,7 @@ const App = props => {
               <Stack.Screen name='Home' component={MainNavigator} />
               :
               <Fragment>
-                <Stack.Screen name="Home" component={LoginScreen} loadApp={LoadApp} />
+                <Stack.Screen name="Home" component={HomeScreen} loadApp={LoadApp} />
 
               </Fragment>
           }
