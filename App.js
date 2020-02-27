@@ -6,22 +6,24 @@ import { HomeScreen } from './Screens/Home/Home';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { View, Text } from 'native-base';
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, ActivityIndicator } from 'react-native';
 import { MainNavigator } from './Navigators/MainNavigator';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import { rootReducer } from './ducks/root';
 import { ConfigureToken } from './utils/configureAxios';
-import { Ionicons } from '@expo/vector-icons';
-import * as Font from 'expo-font';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { QuoteNavigator } from './Navigators/QuoteNavigator';
+import { HomeNavigator } from './Navigators/HomeNavigator';
+import { SideNavigator } from './Navigators/SideNavigator';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middleware = [thunk]
 const store = createStore(
   rootReducer,
   composeEnhancers(applyMiddleware(...middleware))
 )
-const Stack = createStackNavigator();
+
 
 const App = props => {
   const [token, setUserToken] = useState("");
@@ -32,18 +34,13 @@ const App = props => {
 
   ConfigureToken();
   const LoadApp = async () => {
-    await Font.loadAsync({
-      Roboto: require('native-base/Fonts/Roboto.ttf'),
-      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-      ...Ionicons.font,
-    });
     const userToken = await AsyncStorage.getItem('jwt')
     if (userToken) {
       setUserToken(userToken)
-      console.log('User is found')
     }
     else {
       setUserToken(null);
+      console.log('Token not set')
     }
     setLoading(false)
   }
@@ -52,20 +49,11 @@ const App = props => {
     return <Loading />
   }
 
+  const Drawer = createDrawerNavigator();
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }} >
-          {
-            token ?
-              <Stack.Screen name='Home' component={MainNavigator} />
-              :
-              <Fragment>
-                <Stack.Screen name="Home" component={HomeScreen} loadApp={LoadApp} />
-
-              </Fragment>
-          }
-        </Stack.Navigator>
+       <SideNavigator/>
       </NavigationContainer>
     </Provider>
   )
@@ -73,8 +61,8 @@ const App = props => {
 
 const Loading = props => {
   return (
-    <View>
-      <Text>LOADING</Text>
+    <View style={{ alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+      <ActivityIndicator />
     </View>
   )
 }
