@@ -19,11 +19,13 @@ export const LoginScreen = props => {
         console.log("Logging in")
         Axios.post(API + '/login', { email, password })
             .then(res => {
+                console.log("Login Was Successful")
                 AsyncStorage.setItem("jwt", res.data.jwt)
                 setAuthToken(res.data.jwt)
                 props.navigation.navigate("Home")
             })
             .catch(err => {
+                console.log("Login Failed")
                 setError(err.response.data.message)
             })
     }

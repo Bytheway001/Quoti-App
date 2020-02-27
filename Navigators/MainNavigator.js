@@ -9,17 +9,27 @@ import { QuoteNavigator } from './QuoteNavigator';
 import { CompareScreen } from '../Screens/Comparador/Compare';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { CompareNavigator } from './CompareNavigator';
 
 const Tab = createBottomTabNavigator();
 export const MainNavigator = props => (
     <Tab.Navigator tabBarOptions={{
-        activeTintColor:Colors.lightBlue
+        activeTintColor: Colors.blue,
+        inactiveTintColor: Colors.lightBlue,
+        style: {
+            borderWidth: 1,
+            borderColor: Colors.lightBlue,
+            borderTopColor: Colors.lightBlue,
+            borderTopWidth: 1,
+            borderRadius: 10,
+            padding: 3
+        }
     }}>
         <Tab.Screen
             name="Home"
             component={HomeScreen}
             options={{
-                
+
                 tabBarLabel: 'Inicio',
                 tabBarIcon: ({ color, size }) => (<FontAwesomeIcon color={color} size={size} icon={faHome} />)
             }}
@@ -34,19 +44,19 @@ export const MainNavigator = props => (
             }} />
         <Tab.Screen
             name="Compare"
-            component={CompareScreen}
+            component={CompareNavigator}
             options={{
                 tabBarLabel: 'Comparador',
                 tabBarIcon: ({ color, size }) => (<FontAwesomeIcon color={color} size={size} icon={faBalanceScale} />)
             }}
         />
-        <Tab.Screen 
-            name="Files" 
+        <Tab.Screen
+            name="Files"
             component={FileScreen}
             options={{
                 tabBarLabel: 'Directorio',
                 tabBarIcon: ({ color, size }) => (<FontAwesomeIcon color={color} size={size} icon={faFileArchive} />)
-            }} 
+            }}
         />
     </Tab.Navigator>
 ) 
