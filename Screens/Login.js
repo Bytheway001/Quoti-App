@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col } from '../Components/Layout';
-import { Text, TextInput,  Image,  AsyncStorage, KeyboardAvoidingView } from 'react-native';
+import { Text, TextInput, Image, AsyncStorage, KeyboardAvoidingView, Linking } from 'react-native';
 import { Colors } from '../assets/Colors';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faEnvelope, faKey } from '@fortawesome/free-solid-svg-icons'
 import Axios from 'axios';
 import { API } from '../globals';
-import { TouchableNativeFeedback } from 'react-native-gesture-handler';
-import {setAuthToken} from '../utils/setAuthToken';
+import { TouchableNativeFeedback, TouchableOpacity } from 'react-native-gesture-handler';
+import { setAuthToken } from '../utils/setAuthToken';
+
+
 export const LoginScreen = props => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -17,18 +19,25 @@ export const LoginScreen = props => {
         console.log("Logging in")
         Axios.post(API + '/login', { email, password })
             .then(res => {
-                AsyncStorage.setItem("jwt",res.data.jwt)
+                console.log("Login Was Successful")
+                AsyncStorage.setItem("jwt", res.data.jwt)
                 setAuthToken(res.data.jwt)
                 props.navigation.navigate("Home")
             })
             .catch(err => {
+                console.log("Login Failed")
                 setError(err.response.data.message)
             })
     }
-    console.log(props.screenProps) 
+    console.log(props.screenProps)
+
+    onClickListener = (viewId) => {
+        Alert.alert("Alert", "Button pressed "+viewId);
+      }
+      
     return (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior='padding'>
-           
+
             <Container style={{ alignItems: 'center', justifyContent: 'center' }}>
 
                 <Image
@@ -50,7 +59,7 @@ export const LoginScreen = props => {
                                     placeholderTextColor='lightgray'
                                     value={email}
                                     onChangeText={(e) => setEmail(e)}
-                                    placeholder="Usuario" />
+                                    placeholder="Correo electrónico" />
 
                             </Col>
                         </Row>
@@ -70,11 +79,19 @@ export const LoginScreen = props => {
                         </Row>
                         <Row style={{ marginTop: 20 }}>
                             <Col size={1} style={{ alignItems: 'center' }}>
-                                <TouchableNativeFeedback onPress={login} style={{ backgroundColor: Colors.blue, paddingVertical: 7, paddingHorizontal: 50 }}>
+                                <TouchableOpacity onPress={login} style={{ backgroundColor: Colors.blue, paddingVertical: 7, paddingHorizontal: 50 }}>
                                     <Text style={{ color: 'white', textAlign: 'center' }}>Ingresar</Text>
-                                </TouchableNativeFeedback>
+                                </TouchableOpacity>
                             </Col>
 
+                        </Row>
+                        <Row>
+                            <TouchableOpacity onPress={() => Linking.openURL('http://www.quotiapp.com/password')}>
+                                <Text style={{ color: 'blue', paddingLeft: 82, paddingTop: 15 }}
+                                    >
+                                    Olvido su clave?
+                                </Text>
+                            </TouchableOpacity>
                         </Row>
                         <Row style={{ marginTop: 20 }}>
                             <Col size={1} style={{ alignItems: 'center' }}>

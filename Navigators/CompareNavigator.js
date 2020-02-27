@@ -1,12 +1,10 @@
 import React from 'react';
-import QuoteScreen from '../Screens/Cotizador/Quote';
-import QuoteResult from '../Screens/Cotizador/QuoteResult';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {CompareScreen} from '../Screens/Comparador/Compare';
 import { Colors } from '../assets/Colors';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faEdit, faMoneyBill, faGlobeAfrica, faCog } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faMoneyBill, faCog } from '@fortawesome/free-solid-svg-icons';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Button } from 'react-native';
+
 
 const headerStyles = {
     backgroundColor: 'white',
@@ -14,12 +12,12 @@ const headerStyles = {
 }
 const Stack = createStackNavigator()
 
-export const QuoteNavigator = props => (
+export const CompareNavigator = props => (
     <Stack.Navigator
     >
         <Stack.Screen
-            name='Cotizador'
-            component={QuoteScreen}
+            name='Comparador'
+            component={CompareScreen}
             options={{
                 tabBarLabel: 'Formulario',
                 tabBarIcon: ({ color, size }) => (<FontAwesomeIcon color={color} size={size} icon={faEdit} />),
@@ -30,8 +28,8 @@ export const QuoteNavigator = props => (
                 )
             }} />
         <Stack.Screen
-            name='Cotización'
-            component={QuoteResult}
+            name='Listado'
+            component={CompareScreen}
             options={{
                 tabBarLabel: 'Planes',
                 tabBarIcon: ({ color, size }) => (<FontAwesomeIcon color={color} size={size} icon={faMoneyBill} />)
