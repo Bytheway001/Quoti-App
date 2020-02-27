@@ -4,7 +4,7 @@ import { Colors } from '../assets/Colors';
 
 export const Container = ({ children, style }) => {
     return (
-        <View style={{ flex: 1,paddingTop:25,paddingLeft:10,paddingRight:10,...style}}>
+        <View style={{ flex: 1,paddingTop:25,paddingLeft:10,paddingRight:10,...style,backgroundColor:'white'}}>
             {children}
         </View>
     )

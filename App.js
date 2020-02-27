@@ -8,9 +8,11 @@ import { AsyncStorage } from 'react-native';
 import { MainNavigator } from './Navigators/MainNavigator';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import { Provider, connect } from 'react-redux';
+import { Provider } from 'react-redux';
 import { rootReducer } from './ducks/root';
 import { ConfigureToken } from './utils/configureAxios';
+import { Ionicons } from '@expo/vector-icons';
+import * as Font from 'expo-font';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middleware = [thunk]
 const store = createStore(
@@ -28,13 +30,18 @@ const App = props => {
 
   ConfigureToken();
   const LoadApp = async () => {
+    await Font.loadAsync({
+      Roboto: require('native-base/Fonts/Roboto.ttf'),
+      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+      ...Ionicons.font,
+    });
     const userToken = await AsyncStorage.getItem('jwt')
     if (userToken) {
       setUserToken(userToken)
+      console.log('User is found')
     }
     else {
       setUserToken(null);
-      console.log('Token not set')
     }
     setLoading(false)
   }
@@ -42,7 +49,6 @@ const App = props => {
   if (loading) {
     return <Loading />
   }
-
 
   return (
     <Provider store={store}>
