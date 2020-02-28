@@ -3399,6 +3399,10 @@ jsonify@~0.0.0:
   resolved "https://registry.yarnpkg.com/jsonify/-/jsonify-0.0.0.tgz#2c74b6ee41d93ca51b7b5aaee8f503631d252a73"
   integrity sha1-LHS27kHZPKUbe1qu6PUDYx0lKnM=
 
+"jwt-decode@https://github.com/auth0/jwt-decode.git":
+  version "2.2.0"
+  resolved "https://github.com/auth0/jwt-decode.git#d5901c3c26c6ac5d26e7be95d79f6c7dc085e0b3"
+
 kind-of@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-1.1.0.tgz#140a3d2d41a36d2efcfa9377b62c24f8495a5c44"

@@ -8,33 +8,15 @@ import Axios from 'axios';
 import { API } from '../globals';
 import { TouchableNativeFeedback, TouchableOpacity } from 'react-native-gesture-handler';
 import { setAuthToken } from '../utils/setAuthToken';
+import { connect } from 'react-redux';
+import { Login } from '../ducks/session';
 
 
-export const LoginScreen = props => {
+const LoginScreen = ({login}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
-    const login = () => {
-        console.log("Logging in")
-        Axios.post(API + '/login', { email, password })
-            .then(res => {
-                console.log("Login Was Successful")
-                AsyncStorage.setItem("jwt", res.data.jwt)
-                setAuthToken(res.data.jwt)
-                props.navigation.navigate("Home")
-            })
-            .catch(err => {
-                console.log("Login Failed")
-                setError(err.response.data.message)
-            })
-    }
-    console.log(props.screenProps)
-
-    onClickListener = (viewId) => {
-        Alert.alert("Alert", "Button pressed "+viewId);
-      }
-      
     return (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior='padding'>
 
@@ -79,11 +61,11 @@ export const LoginScreen = props => {
                         </Row>
                         <Row style={{ marginTop: 20 }}>
                             <Col size={1} style={{ alignItems: 'center' }}>
-                                <TouchableOpacity onPress={login} style={{ backgroundColor: Colors.blue, paddingVertical: 7, paddingHorizontal: 50 }}>
+                                <TouchableOpacity onPress={()=>login(email,password)} style={{ backgroundColor: Colors.blue, paddingVertical: 7, paddingHorizontal: 50 }}>
                                     <Text style={{ color: 'white', textAlign: 'center' }}>Ingresar</Text>
                                 </TouchableOpacity>
                             </Col>
-
+ 
                         </Row>
                         <Row>
                             <TouchableOpacity onPress={() => Linking.openURL('http://www.quotiapp.com/password')}>
@@ -114,4 +96,13 @@ export const LoginScreen = props => {
     )
 }
 
+const mapStateToProps = state =>{
+    return {}
+}
 
+const mapDispatchToProps = dispatch=>{
+    return{
+        login:(email,password)=>dispatch(Login(email,password))
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(LoginScreen)
