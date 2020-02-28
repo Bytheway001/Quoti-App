@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useState} from 'react';
 import { View, Text, Button, Image, ImageBackground } from 'react-native';
 import { Container, Row, Col } from '../../Components/Layout';
 import { Colors } from '../../assets/Colors';
@@ -8,6 +8,7 @@ import ComparadorIcon from '../../assets/comparadorIcon.png';
 import CotizadorIcon from '../../assets/cotizadorIcon.png';
 import BackGroundImage from '../../assets/bgMerged.png';
 import QuoteLogo  from '../../assets/quoti-logo.png';
+
 
 const HomeIcon = ({ src, title, style,borders }) => {
     let borderRightWidth = borders['right']==true?2:0
@@ -48,6 +49,7 @@ const HomeIcon = ({ src, title, style,borders }) => {
 }
 
 export const HomeScreen = (props) => {
+
     return (
         <ImageBackground
             style={{ width: '100%', height: '100%' }}
@@ -67,6 +69,7 @@ export const HomeScreen = (props) => {
                         <HomeIcon src={SoporteIcon} title='Soporte' borders={{bottom:true}}/>
                     </Col>
                 </Row>
+               
 
 
             </Container>
