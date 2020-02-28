@@ -5,7 +5,7 @@ import { faCog } from '@fortawesome/free-solid-svg-icons'
 import { Colors } from '../assets/Colors'
 
 export const DrawerIcon = ({ navigation }) => {
-    console.log(navigation)
+
     return (
         <TouchableWithoutFeedback onPress={() => navigation.toggleDrawer()}>
             <FontAwesomeIcon icon={faCog} size={24} color={Colors.lightBlue} style={{ marginRight: 20 }} />

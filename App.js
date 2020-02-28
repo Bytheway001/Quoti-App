@@ -7,16 +7,16 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { View, Text } from 'native-base';
 import { AsyncStorage, ActivityIndicator } from 'react-native';
-import { MainNavigator } from './Navigators/MainNavigator';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import { Provider, connect } from 'react-redux';
+import { Provider } from 'react-redux';
 import { rootReducer } from './ducks/root';
 import { ConfigureToken } from './utils/configureAxios';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { QuoteNavigator } from './Navigators/QuoteNavigator';
-import { HomeNavigator } from './Navigators/HomeNavigator';
-import { SideNavigator } from './Navigators/SideNavigator';
+
+
+import jwt_decode from 'jwt-decode';
+import { onLoginSucceeded } from './ducks/session';
+import RootNavigator  from './Navigators/RootNavigator';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middleware = [thunk]
 const store = createStore(
@@ -26,8 +26,7 @@ const store = createStore(
 
 
 const App = props => {
-  const [token, setUserToken] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
     LoadApp()
   })
@@ -36,24 +35,18 @@ const App = props => {
   const LoadApp = async () => {
     const userToken = await AsyncStorage.getItem('jwt')
     if (userToken) {
-      setUserToken(userToken)
-    }
-    else {
-      setUserToken(null);
-      console.log('Token not set')
+      store.dispatch(onLoginSucceeded(jwt_decode(userToken).data))
     }
     setLoading(false)
   }
 
-  if (loading) {
-    return <Loading />
-  }
+  if (loading) { return <Loading /> }
 
-  const Drawer = createDrawerNavigator();
+
   return (
     <Provider store={store}>
-      <NavigationContainer>
-       <SideNavigator/>
+      <NavigationContainer >
+        <RootNavigator />
       </NavigationContainer>
     </Provider>
   )
@@ -65,12 +58,6 @@ const Loading = props => {
       <ActivityIndicator />
     </View>
   )
-}
-
-const mapStateToProps = state => {
-  return {
-    token: state.session.token
-  }
 }
 
 export default App;
