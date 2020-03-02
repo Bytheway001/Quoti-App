@@ -1,22 +1,16 @@
-import React, { useEffect, useState, Fragment } from 'react';
-import { LoginScreen } from './Screens/Login';
-import { HomeScreen } from './Screens/Home/Home';
-
-//import { MainNavigator } from './Navigators/MainNavigator';
+import React, { useEffect, useState} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { View, Text } from 'native-base';
+import { View } from 'native-base';
 import { AsyncStorage, ActivityIndicator } from 'react-native';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { rootReducer } from './ducks/root';
 import { ConfigureToken } from './utils/configureAxios';
-
-
 import jwt_decode from 'jwt-decode';
 import { onLoginSucceeded } from './ducks/session';
 import RootNavigator  from './Navigators/RootNavigator';
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middleware = [thunk]
 const store = createStore(
@@ -29,7 +23,7 @@ const App = props => {
   const [loading, setLoading] = useState(true)
   useEffect(() => {
     LoadApp()
-  })
+  },[])
 
   ConfigureToken();
   const LoadApp = async () => {
@@ -41,7 +35,7 @@ const App = props => {
   }
 
   if (loading) { return <Loading /> }
-
+ 
 
   return (
     <Provider store={store}>

@@ -15,7 +15,6 @@ const RootNavigator = ({ navigation, user, ...props }) => {
             {
                 user ?
                     <Stack.Screen name='Home' component={SideNavigator} />
-
                     :
                     <Stack.Screen name='Home' component={LoginScreen} />
             }
