@@ -14,10 +14,10 @@ export const Feather = ({icon, title, style,onPress}) =>{
             alignItems:'center',
             padding:10,
             borderColor:Colors.lightBlue,
-            borderTopLeftRadius:10,
-            borderBottomRightRadius:10
+            borderTopLeftRadius:15,
+            borderBottomRightRadius:15
             }}>
-            <FontAwesomeIcon icon={icon} color={Colors.lightBlue} size={48} style={{marginTop:15}}/>
+            <FontAwesomeIcon icon={icon} color={Colors.lightBlue} size={36} style={{marginTop:15,marginBottom:15}}/>
             <Text align='center' color='lightBlue' style={{marginBottom:15}}>{title}</Text>
         </View>
         </TouchableOpacity>
