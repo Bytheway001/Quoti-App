@@ -1,5 +1,5 @@
 import React from 'react';
-import {CompareScreen} from '../Screens/Comparador/Compare';
+import CompareScreen from '../Screens/Comparador/Compare';
 import { Colors } from '../assets/Colors';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faEdit, faMoneyBill, faCog } from '@fortawesome/free-solid-svg-icons';

@@ -26,7 +26,8 @@ export const Login = (email,password) => {
             .then(res => {
                 console.log("Login Was Successful")
                 AsyncStorage.setItem("jwt", res.data.jwt)
-                setAuthToken(res.data.jwt)
+                AsyncStorage.setItem("refresh_token",res.data.refresh_token);
+                setAuthToken(res.data.jwt,res.data.refresh_token)
                 dispatch(onLoginSucceeded(jwt_decode(res.data.jwt).data))
             })
             .catch(err => {

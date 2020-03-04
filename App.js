@@ -12,6 +12,8 @@ import { ConfigureToken } from './utils/configureAxios';
 import jwt_decode from 'jwt-decode';
 import { onLoginSucceeded } from './ducks/session';
 import RootNavigator  from './Navigators/RootNavigator';
+import configureToken from './utils/configureAxios';
+import { setAuthToken } from './utils/setAuthToken';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middleware = [thunk]
@@ -27,10 +29,12 @@ const App = props => {
     LoadApp()
   },[])
 
-  ConfigureToken();
+  configureToken();
   const LoadApp = async () => {
     const userToken = await AsyncStorage.getItem('jwt')
     if (userToken) {
+      console.log(userToken)
+      setAuthToken(userToken)
       store.dispatch(onLoginSucceeded(jwt_decode(userToken).data))
     }
     setLoading(false)

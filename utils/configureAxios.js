@@ -1,6 +1,11 @@
 import axios from 'axios';
-import { AsyncStorage } from 'react-native';
-export const ConfigureToken = () => {
+
+
+import { router } from '../app';
+import { TokenStorage } from './TokenStorage';
+
+export default configureToken = () => {
+
     axios.interceptors.response.use((response) => {
         // Return a successful response back to the calling service
         return response;
@@ -11,16 +16,11 @@ export const ConfigureToken = () => {
                 reject(error);
             });
         }
-        else{
-            console.log('Rejected')
-        }
-
- 
-      
 
         // Logout user if token refresh didn't work or user is disabled
-        if (error.config.url == '/api/token/refresh' || error.response.message == 'Unauthorized') {
-            AsyncStorage.removeItem("jwt");
+        if (error.config.url == 'http://quotyapi.megabrokerslatam.co/api/refresh_token' || error.response.data.message == 'Unauthorized') {
+            console.log('refresh did not work');
+            TokenStorage.clear();
             return new Promise((resolve, reject) => {
                 reject(error);
             });
@@ -29,7 +29,7 @@ export const ConfigureToken = () => {
         // Try request again with new token
         return TokenStorage.getNewToken()
             .then((token) => {
-
+                console.log('Trying Again');
                 // New request with new token
                 const config = error.config;
                 config.headers['Authorization'] = `Bearer ${token}`;

@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHome, faCoins, faBalanceScale, faFileArchive } from '@fortawesome/free-solid-svg-icons';
 
 import { QuoteNavigator } from './QuoteNavigator';
-import { CompareScreen } from '../Screens/Comparador/Compare';
+
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CompareNavigator } from './CompareNavigator';
