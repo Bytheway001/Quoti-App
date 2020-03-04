@@ -4,13 +4,14 @@ import { HomeScreen } from '../Screens/Home/Home'
 import { Colors } from '../assets/Colors';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHome, faCoins, faBalanceScale, faFileArchive } from '@fortawesome/free-solid-svg-icons';
-import { FileScreen } from '../Screens/Directorio/Files';
+
 import { QuoteNavigator } from './QuoteNavigator';
 import { CompareScreen } from '../Screens/Comparador/Compare';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CompareNavigator } from './CompareNavigator';
 import { HomeNavigator } from './HomeNavigator';
+import { FileScreen } from '../Screens/Directorio/Files';
 
 const Tab = createBottomTabNavigator();
 export const MainNavigator = props => (

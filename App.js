@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { View } from 'native-base';
@@ -7,6 +8,7 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { rootReducer } from './ducks/root';
 import { ConfigureToken } from './utils/configureAxios';
+
 import jwt_decode from 'jwt-decode';
 import { onLoginSucceeded } from './ducks/session';
 import RootNavigator  from './Navigators/RootNavigator';

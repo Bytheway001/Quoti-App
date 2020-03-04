@@ -1,13 +1,13 @@
+
 import React, { useState } from 'react';
 import { View, Text, Button, Image, ImageBackground, AsyncStorage, Linking } from 'react-native';
+
 import { Container, Row, Col } from '../../Components/Layout';
 import BackGroundImage from '../../assets/bgMerged.png';
 import QuoteLogo from '../../assets/quoti-logo.png';
 import { Feather } from '../../Components/Feather';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { faBalanceScale, faFileArchive, faCoins } from '@fortawesome/free-solid-svg-icons';
-
-
 export const HomeScreen = (props) => {
     const [show, setShow] = useState('');
 
@@ -37,6 +37,7 @@ export const HomeScreen = (props) => {
 
 
                 </Row>
+               
 
 
 
