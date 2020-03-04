@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { connect } from 'react-redux';
 import { getQuote } from '../../ducks/quote/quote';
 import { styles } from './styles';
+import { Button } from 'native-base';
 const CountryOptions = [
     { label: 'Bolivia', value: "BO" },
     { label: 'Peru', value: 'PE' },
@@ -20,7 +21,7 @@ const PlanOptions = [
     { label: 'Familias', value: "3" }
 ]
 
-const QuoteScreen = ({ navigation,getQuote }) => {
+const QuoteScreen = ({ navigation, getQuote }) => {
     const [country, setCountry] = useState("");
     const [plan_type, setPlanType] = useState("");
     const [numKids, setNumKids] = useState("");
@@ -48,8 +49,8 @@ const QuoteScreen = ({ navigation,getQuote }) => {
 
     }
 
-     const handleQuote =async ()=>{
-        await getQuote({country,plan_type,main_age,couple_age,numKids,kidAges})
+    const handleQuote = async () => {
+        await getQuote({ country, plan_type, main_age, couple_age, numKids, kidAges })
         navigation.navigate('QuoteResult');
     }
     return (
@@ -59,9 +60,20 @@ const QuoteScreen = ({ navigation,getQuote }) => {
                     <Select value={country} title='Pais:' options={CountryOptions} onChange={setCountry} />
                 </Col>
             </Row>
+            <Row style={styles.row}>
+                <Col size={1}>
+                    <Text style={{textAlign:'center'}}>Tipo de plan</Text>
+                </Col>
+            </Row>
             <Row style={styles.row} >
-                <Col size={1} >
-                    <Select value={plan_type} title="Tipo" options={PlanOptions} onChange={setPlanType} />
+                <Col size={1}>
+                    <PlanSelect type='Personal' disabled={true} />
+                </Col>
+                <Col size={1}>
+                    <PlanSelect type='Parejas' disabled={true}/>
+                </Col>
+                <Col size={1}>
+                    <PlanSelect type='Familias' disabled={true}/>
                 </Col>
             </Row>
             <Row style={styles.row}>
@@ -104,7 +116,7 @@ const QuoteScreen = ({ navigation,getQuote }) => {
                             backgroundColor: Colors.blue,
                             paddingVertical: 7
                         }}
-                        onPress={() => handleQuote() }>
+                        onPress={() => handleQuote()}>
                         <Text style={{ textAlign: 'center', color: 'white', fontSize: 18 }}>Cotizar!</Text>
                     </TouchableOpacity>
                 </Col>
@@ -112,13 +124,26 @@ const QuoteScreen = ({ navigation,getQuote }) => {
         </Container>
     )
 }
- 
+
+const PlanSelect = props => (
+    <Button style={{
+        backgroundColor: props.disabled?Colors.skyBlue:Colors.buttonBlue,
+        borderRadius: 5,
+        padding: 0,
+        height: 'auto',
+        marginHorizontal: 1
+    }}>
+        <Text style={{ width: '100%', textAlign: 'center', color: 'white' }}>{props.type}</Text>
+    </Button>
+
+)
+
 const KidInput = ({ number, value, onChange }) => (
     <Col style={styles.kidInput}>
         <Text align='center'>{number}</Text>
         <TextInput onChangeText={(e) => onChange(e, number)} value={value} style={{ textAlign: 'center', borderWidth: 1, borderColor: Colors.blue, height: 40, borderRadius: 20 }} />
     </Col>
-) 
+)
 
 const mapStateToProps = state => (
     {}

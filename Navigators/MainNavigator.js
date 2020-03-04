@@ -10,6 +10,7 @@ import { CompareScreen } from '../Screens/Comparador/Compare';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CompareNavigator } from './CompareNavigator';
+import { HomeNavigator } from './HomeNavigator';
 
 const Tab = createBottomTabNavigator();
 export const MainNavigator = props => (
@@ -27,7 +28,7 @@ export const MainNavigator = props => (
     }}>
         <Tab.Screen
             name="Home"
-            component={HomeScreen}
+            component={HomeNavigator}
             options={{
 
                 tabBarLabel: 'Inicio',

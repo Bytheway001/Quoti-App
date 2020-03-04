@@ -1,73 +1,48 @@
-import React, { useEffect, useState, Fragment } from 'react';
-import { LoginScreen } from './Screens/Login';
-import { HomeScreen } from './Screens/Home/Home';
-import { FileScreen } from './Screens/Directorio/Files';
 
-//import { MainNavigator } from './Navigators/MainNavigator';
+import React, { useEffect, useState} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { View, Text } from 'native-base';
-import { AsyncStorage } from 'react-native';
-import { MainNavigator } from './Navigators/MainNavigator';
+import { View } from 'native-base';
+import { AsyncStorage, ActivityIndicator } from 'react-native';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { rootReducer } from './ducks/root';
 import { ConfigureToken } from './utils/configureAxios';
-import { Ionicons } from '@expo/vector-icons';
 
-import * as Font from 'expo-font';
+import jwt_decode from 'jwt-decode';
+import { onLoginSucceeded } from './ducks/session';
+import RootNavigator  from './Navigators/RootNavigator';
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middleware = [thunk]
 const store = createStore(
   rootReducer,
   composeEnhancers(applyMiddleware(...middleware))
 )
-const Stack = createStackNavigator();
+
 
 const App = props => {
-  const [token, setUserToken] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
     LoadApp()
-  })
+  },[])
 
   ConfigureToken();
   const LoadApp = async () => {
-    await Font.loadAsync({
-      Roboto: require('native-base/Fonts/Roboto.ttf'),
-      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-      ...Ionicons.font,
-    });
     const userToken = await AsyncStorage.getItem('jwt')
     if (userToken) {
-      setUserToken(userToken)
-      console.log('User is found')
-    }
-    else {
-      setUserToken(null);
+      store.dispatch(onLoginSucceeded(jwt_decode(userToken).data))
     }
     setLoading(false)
   }
 
-  if (loading) {
-    return <Loading />
-  }
+  if (loading) { return <Loading /> }
+ 
 
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }} >
-          {
-            token ?
-              <Stack.Screen name='Home' component={MainNavigator} />
-              :
-              <Fragment>
-                <Stack.Screen name="Home" component={FileScreen} loadApp={LoadApp} />
-
-              </Fragment>
-          }
-        </Stack.Navigator>
+      <NavigationContainer >
+        <RootNavigator />
       </NavigationContainer>
     </Provider>
   )
@@ -75,16 +50,10 @@ const App = props => {
 
 const Loading = props => {
   return (
-    <View>
-      <Text>LOADING</Text>
+    <View style={{ alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+      <ActivityIndicator />
     </View>
   )
-}
-
-const mapStateToProps = state => {
-  return {
-    token: state.session.token
-  }
 }
 
 export default App;
